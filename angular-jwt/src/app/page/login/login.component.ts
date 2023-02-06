@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, zip } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { AuthService } from 'src/app/service/auth.service';
@@ -14,6 +15,8 @@ export class LoginComponent implements OnInit {
   auth: AuthService = inject(AuthService);
 
   http: HttpClient = inject(HttpClient);
+
+  router: Router = inject(Router);
 
   loginData: User = new User();
 
@@ -31,7 +34,11 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.auth.login(this.loginData).subscribe(
-      () => {}
+      response => {
+        if (response.user !== null) {
+          this.router.navigate(['/']);
+        }
+      }
     );
   }
 

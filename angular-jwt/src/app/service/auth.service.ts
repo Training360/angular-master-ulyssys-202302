@@ -21,7 +21,24 @@ export class AuthService {
 
   private http: HttpClient = inject(HttpClient);
 
-  constructor() { }
+  constructor() {
+    if (sessionStorage['appUser']) {
+      this.lastToken = sessionStorage.getItem('lastToken') ?? '';
+      this.currentUserSubject.next( JSON.parse( sessionStorage.getItem('appUser') ?? '' ));
+    }
+
+    this.currentUserSubject.subscribe(
+      userOrNull => {
+        if (userOrNull !== null) {
+          sessionStorage.setItem('lastToken', this.lastToken);
+          sessionStorage.setItem('appUser', JSON.stringify(userOrNull));
+        } else {
+          sessionStorage.removeItem('lastToken');
+          sessionStorage.removeItem('appUser');
+        }
+      }
+    );
+  }
 
   login(loginData: User): Observable<{user: User | null}> {
     return this.http.post<{accessToken: string, user: User}>(
@@ -34,15 +51,20 @@ export class AuthService {
       }),
       map( response => {
         if( response.accessToken && response.user ) {
-          this.currentUserSubject.next(response.user);
           this.lastToken = response.accessToken;
+          this.currentUserSubject.next(response.user);
           return { user: response.user };
         }
 
-        this.currentUserSubject.next(null);
         this.lastToken = '';
+        this.currentUserSubject.next(null);
         return { user: null };
       }),
     );
+  }
+
+  logout(): void {
+    this.currentUserSubject.next(null);
+    this.lastToken = '';
   }
 }
