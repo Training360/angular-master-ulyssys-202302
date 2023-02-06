@@ -1,0 +1,22 @@
+{
+    "user": [
+        {
+            "id": 1,
+            "name": "Charlie Firpo",
+            "email": "cf@gmail.com",
+            "password": ""
+        },
+        {
+            "id": 2,
+            "name": "Johnny Firpo",
+            "email": "jf@gmail.com",
+            "password": ""
+        },
+        {
+            "id": 3,
+            "name": "Bob Firpo",
+            "email": "cbf@gmail.com",
+            "password": ""
+        }
+    ]
+}
