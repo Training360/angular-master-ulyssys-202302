@@ -21,5 +21,47 @@
       "role": 3,
       "password": "$2a$10$CYQ..pTilwTMDgX8zBqMGubRTyy7osUlg4BxaZdJdwpfMqZr3HXi6"
     }
-  ]
+  ],
+  "cinemas": [
+    {
+        "id": 1,
+        "name": "Regal Cinemas",
+        "location": "Los Angeles, CA",
+        "genre": "Action",
+        "seats": 200,
+        "price": 10.00
+    },
+    {
+        "id": 2,
+        "name": "AMC Theaters",
+        "location": "New York City, NY",
+        "genre": "Romance",
+        "seats": 150,
+        "price": 11.00
+    },
+    {
+        "id": 3,
+        "name": "Cinemark",
+        "location": "Dallas, TX",
+        "genre": "Comedy",
+        "seats": 300,
+        "price": 9.00
+    },
+    {
+        "id": 4,
+        "name": "ArcLight Cinemas",
+        "location": "Chicago, IL",
+        "genre": "Drama",
+        "seats": 250,
+        "price": 12.00
+    },
+    {
+        "id": 5,
+        "name": "Alamo Drafthouse",
+        "location": "Austin, TX",
+        "genre": "Sci-Fi",
+        "seats": 200,
+        "price": 10.00
+    }
+]
 }
