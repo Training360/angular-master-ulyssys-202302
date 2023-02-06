@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +9,8 @@ import { LoginComponent } from './page/login/login.component';
 import { HomeComponent } from './page/home/home.component';
 import { NavigationComponent } from './common/navigation/navigation.component';
 import { UserComponent } from './page/user/user.component';
+import { JwtInterceptor } from './interceptor/jwt.interceptor';
+import { CinemaComponent } from './page/cinema/cinema.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { UserComponent } from './page/user/user.component';
     LoginComponent,
     HomeComponent,
     NavigationComponent,
-    UserComponent
+    UserComponent,
+    CinemaComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,13 @@ import { UserComponent } from './page/user/user.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

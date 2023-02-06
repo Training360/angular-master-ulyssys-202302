@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>location</th>
+                    <th>genre</th>
+                    <th>seats</th>
+                    <th>price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cinema of list$ | async">
+                    <td>{{ cinema.id }}</td>
+                    <td>{{ cinema.name }}</td>
+                    <td>{{ cinema.location }}</td>
+                    <td>{{ cinema.genre }}</td>
+                    <td>{{ cinema.seats }}</td>
+                    <td>{{ cinema.price }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
