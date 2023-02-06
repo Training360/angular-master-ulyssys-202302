@@ -1,22 +1,22 @@
 {
-    "user": [
-        {
-            "id": 1,
-            "name": "Charlie Firpo",
-            "email": "cf@gmail.com",
-            "password": ""
-        },
-        {
-            "id": 2,
-            "name": "Johnny Firpo",
-            "email": "jf@gmail.com",
-            "password": ""
-        },
-        {
-            "id": 3,
-            "name": "Bob Firpo",
-            "email": "cbf@gmail.com",
-            "password": ""
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "name": "Charlie Firpo",
+      "email": "cf@gmail.com",
+      "password": "$2a$10$3v2zpndp1k.dzC.fSZi87OBMXSQxehnaSjjJ6SVbRmyRgkTm6npFq"
+    },
+    {
+      "id": 2,
+      "name": "Johnny Firpo",
+      "email": "jf@gmail.com",
+      "password": "$2a$10$sgSj7mOFQmRveqKVulpbAeWT2PCxu4a5n322Qyr5y..PibmNvz4Oq"
+    },
+    {
+      "id": 3,
+      "name": "Bob Firpo",
+      "email": "cbf@gmail.com",
+      "password": "$2a$10$CYQ..pTilwTMDgX8zBqMGubRTyy7osUlg4BxaZdJdwpfMqZr3HXi6"
+    }
+  ]
 }
