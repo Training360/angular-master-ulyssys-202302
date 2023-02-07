@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Year</th>
+                    <th>Active</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let movie of movieList$ | async">
+                    <td>{{ movie.id }}</td>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.category }}</td>
+                    <td>{{ movie.year }}</td>
+                    <td>{{ transformActive(movie.active) }}</td>
+                    <td>{{ fibonacciGenerator( movie.year - 2000 ) }}</td>
+                    <td>
+                        <button (click)="onSave()" class="btn btn-primary">
+                            <i class="fa fa-save"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
