@@ -1,4 +1,9 @@
 <div class="row">
+    <div class="col-6 offset-6">
+        <input placeholder="filter movies" [formControl]="phraseControl" type="text" class="form-control">
+    </div>
+</div>
+<div class="row">
     <div class="col-12">
         <table class="table table-striped">
             <thead>
@@ -13,13 +18,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let movie of movieList$ | async">
+                <tr *ngFor="let movie of list | filter:phrase">
                     <td>{{ movie.id }}</td>
                     <td>{{ movie.title }}</td>
                     <td>{{ movie.category }}</td>
                     <td>{{ movie.year }}</td>
-                    <td>{{ transformActive(movie.active) }}</td>
-                    <td>{{ fibonacciGenerator( movie.year - 2000 ) }}</td>
+                    <td>{{ movie.active }}</td>
+                    <td>{{ ( movie.year - 2000 ) | fibonacci }}</td>
                     <td>
                         <button (click)="onSave()" class="btn btn-primary">
                             <i class="fa fa-save"></i>

@@ -1,16 +1,41 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { debounceTime, Subscription } from 'rxjs';
+import { Movie } from 'src/app/model/movie';
 import { MovieService } from 'src/app/service/movie.service';
 
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
-  styleUrls: ['./data-table.component.scss']
+  styleUrls: ['./data-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DataTableComponent {
+export class DataTableComponent implements OnInit, OnDestroy {
 
-  movieService: MovieService = inject(MovieService);
+  @Input() columns: string[] = [];
 
-  movieList$ = this.movieService.getAll();
+  @Input() list: Movie[] = [];
+
+  cd: ChangeDetectorRef = inject(ChangeDetectorRef);
+
+  phraseControl: FormControl = new FormControl('');
+
+  phrase: string = '';
+
+  stepper: number = 0;
+
+  subscriptions: Subscription = new Subscription();
+
+  ngOnInit(): void {
+    this.subscriptions.add(this.phraseControl.valueChanges.pipe(
+      debounceTime(750),
+    ).subscribe(
+      newValue => {
+        this.phrase = newValue;
+        this.cd.markForCheck();
+      }
+    ));
+  }
 
   transformActive(actvie: boolean): string {
     return actvie ? 'active' : 'inactive';
@@ -25,6 +50,10 @@ export class DataTableComponent {
 
   onSave(): void {
     console.log('Save');
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
 }
