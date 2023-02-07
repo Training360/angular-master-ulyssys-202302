@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Movie } from './model/movie';
+import { ConfigService } from './service/config.service';
 import { MovieService } from './service/movie.service';
 
 @Component({
@@ -13,6 +14,10 @@ export class AppComponent implements OnInit {
   movieService: MovieService = inject(MovieService);
 
   movieList: Movie[] = [];
+
+  config: ConfigService = inject(ConfigService);
+
+  cols = this.config.movieTableColumns;
 
   ngOnInit(): void {
     this.movieService.getAll().subscribe(

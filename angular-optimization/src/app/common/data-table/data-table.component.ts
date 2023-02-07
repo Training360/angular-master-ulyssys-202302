@@ -12,7 +12,7 @@ import { MovieService } from 'src/app/service/movie.service';
 })
 export class DataTableComponent implements OnInit, OnDestroy {
 
-  @Input() columns: string[] = [];
+  @Input() columns: {title: string, key: string}[] = [];
 
   @Input() list: Movie[] = [];
 
