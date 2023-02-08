@@ -1,27 +1,19 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { Movie } from './model/movie';
 import { ConfigService } from './service/config.service';
 import { MovieService } from './service/movie.service';
+import { selectMovieError } from './store/movie/MovieReducer';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  title = 'angular-optimization';
+export class AppComponent {
 
-  movieService: MovieService = inject(MovieService);
+  store: Store = inject(Store);
 
-  movieList: Movie[] = [];
-
-  config: ConfigService = inject(ConfigService);
-
-  cols = this.config.movieTableColumns;
-
-  ngOnInit(): void {
-    this.movieService.getAll().subscribe(
-      list => this.movieList = list
-    );
-  }
+  movieError$ = this.store.pipe( select(selectMovieError) );
+  
 }

@@ -9,13 +9,21 @@ import { AppComponent } from './app.component';
 import { DataTableComponent } from './common/data-table/data-table.component';
 import { FilterPipe } from './pipe/filter.pipe';
 import { FibonacciPipe } from './pipe/fibonacci.pipe';
+import { StoreModule } from '@ngrx/store';
+import { movieReducer } from './store/movie/MovieReducer';
+import { EffectsModule } from '@ngrx/effects';
+import { MovieComponent } from './page/movie/movie.component';
+import { HomeComponent } from './page/home/home.component';
+import { MovieEffect } from './store/movie/MovieEffects';
 
 @NgModule({
   declarations: [
     AppComponent,
     DataTableComponent,
     FilterPipe,
-    FibonacciPipe
+    FibonacciPipe,
+    MovieComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +32,8 @@ import { FibonacciPipe } from './pipe/fibonacci.pipe';
     FormsModule,
     ReactiveFormsModule,
     PushModule,
+    StoreModule.forRoot({movie: movieReducer}, {}),
+    EffectsModule.forRoot([ MovieEffect ]),    
   ],
   providers: [],
   bootstrap: [AppComponent]
