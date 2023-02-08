@@ -16,6 +16,8 @@ import { MovieComponent } from './page/movie/movie.component';
 import { HomeComponent } from './page/home/home.component';
 import { MovieEffect } from './store/movie/MovieEffects';
 import { CacheInterceptor } from './interceptor/cache.interceptor';
+import { ButtonGroupComponent } from './common/button-group/button-group.component';
+import { SortPipe } from './sort.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { CacheInterceptor } from './interceptor/cache.interceptor';
     FilterPipe,
     FibonacciPipe,
     MovieComponent,
-    HomeComponent
+    HomeComponent,
+    ButtonGroupComponent,
+    SortPipe
   ],
   imports: [
     BrowserModule,

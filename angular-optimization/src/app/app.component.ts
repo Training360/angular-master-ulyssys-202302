@@ -11,6 +11,7 @@ import { selectMovieError } from './store/movie/MovieReducer';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  title = 'angular-optimization';
 
   store: Store = inject(Store);
 

@@ -48,7 +48,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
 	  return this.fibonacciGenerator(num - 1) + this.fibonacciGenerator(num - 2);
   }
 
-  onSave(): void {
+  onSave(movie: Movie): void {
     console.log('Save');
   }
 

@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import memo from 'memo-decorator';
 
-const fibonacciGenerator = (num: number): number => {
+export const fibonacciGenerator = (num: number): number => {
   num = Math.abs(num) > 33 ? 33 : Math.abs(num);
   if (num <= 1) return 1;
 
