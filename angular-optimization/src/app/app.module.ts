@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PushModule } from '@rx-angular/template/push';
+import { TableModule } from 'primeng/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { MovieEffect } from './store/movie/MovieEffects';
 import { CacheInterceptor } from './interceptor/cache.interceptor';
 import { ButtonGroupComponent } from './common/button-group/button-group.component';
 import { SortPipe } from './sort.pipe';
+import { PrimeTableComponent } from './page/prime-table/prime-table.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { SortPipe } from './sort.pipe';
     MovieComponent,
     HomeComponent,
     ButtonGroupComponent,
-    SortPipe
+    SortPipe,
+    PrimeTableComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { SortPipe } from './sort.pipe';
     ReactiveFormsModule,
     PushModule,
     StoreModule.forRoot({movie: movieReducer}, {}),
-    EffectsModule.forRoot([ MovieEffect ]),    
+    EffectsModule.forRoot([ MovieEffect ]),  
+    TableModule,  
   ],
   providers: [
     {

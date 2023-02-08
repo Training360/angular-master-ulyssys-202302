@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { fibonacciGenerator, FibonacciPipe } from 'src/app/pipe/fibonacci.pipe';
 import { FilterPipe } from 'src/app/pipe/filter.pipe';
 import { ConfigService } from 'src/app/service/config.service';
@@ -14,20 +15,20 @@ describe('DataTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         DataTableComponent,
         FilterPipe,
         FibonacciPipe,
-       ],
+      ],
       imports: [
         ReactiveFormsModule,
       ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DataTableComponent);
     component = fixture.componentInstance;
-    
+
     component.columns = config.movieTableColumns;
     component.list = movieList;
     fixture.detectChanges();
@@ -57,17 +58,17 @@ describe('DataTableComponent', () => {
       expect(headers[4].innerText).toMatch(/Active/i);
     });
   });
-  
+
   it('table rows should appear', async () => {
     const tableRows = fixture.debugElement.nativeElement.querySelectorAll(
       'table tbody tr'
     );
-    
+
     fixture.whenStable().then(() => {
       expect(tableRows.length).toEqual(3);
     });
   });
-  
+
   it('save button should be called', async () => {
     spyOn(component, 'onSave');
 
@@ -77,12 +78,12 @@ describe('DataTableComponent', () => {
     saveBtn.click();
     fixture.detectChanges();
     component.cd.detectChanges();
-    
+
     fixture.whenStable().then(() => {
       expect(component.onSave).toHaveBeenCalled();
     });
   });
-  
+
   it('save button should be called with correct param', async () => {
     spyOn(component, 'onSave');
 
@@ -92,23 +93,43 @@ describe('DataTableComponent', () => {
     saveBtn.click();
     fixture.detectChanges();
     component.cd.detectChanges();
-    
+
     fixture.whenStable().then(() => {
       expect(component.onSave).toHaveBeenCalledWith(movieList[0]);
     });
   });
-  
+
   it('fibonacci value should correct', async () => {
 
     const fibonacciCell = fixture.debugElement.nativeElement.querySelector(
       'table tbody tr:first-child td:nth-child(6)'
     );
 
-    const fibonacciNumber = fibonacciGenerator( ( movieList[0].year - 2000 ) ).toString();
-    
+    const fibonacciNumber = fibonacciGenerator((movieList[0].year - 2000)).toString();
+
     fixture.whenStable().then(() => {
       expect(fibonacciCell.innerText.replace(/[^0-9]/g, '')).toEqual(fibonacciNumber);
     });
+
+  });
+
+  it('table filter shuld work', async () => {
+
+    const filterInput: HTMLInputElement = fixture.debugElement.nativeElement.querySelector(
+      '.row .col-6 input.form-control'
+    );
+
+    filterInput.value = 'firebase';
+    filterInput.dispatchEvent(new Event('input'));
+
+    await new Promise( r => setTimeout(r, 1000) );
+    component.cd.detectChanges();
+
+    const idCell = fixture.debugElement.nativeElement.querySelector(
+      'table tbody tr td'
+    );
+
+    expect(idCell.innerText).toEqual('6');
 
   });
 
