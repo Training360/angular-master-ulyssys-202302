@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PushModule } from '@rx-angular/template/push';
 
@@ -15,6 +15,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { MovieComponent } from './page/movie/movie.component';
 import { HomeComponent } from './page/home/home.component';
 import { MovieEffect } from './store/movie/MovieEffects';
+import { CacheInterceptor } from './interceptor/cache.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,13 @@ import { MovieEffect } from './store/movie/MovieEffects';
     StoreModule.forRoot({movie: movieReducer}, {}),
     EffectsModule.forRoot([ MovieEffect ]),    
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CacheInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
