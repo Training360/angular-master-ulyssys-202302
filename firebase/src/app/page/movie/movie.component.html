@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="d-grid gap-2 my-3">
+        <button routerLink="/movie/edit/0" class="btn btn-success" type="button">Button</button>
+      </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Category</th>
+                    <th>Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let movie of items$ | async">
+                    <td>{{ movie.id }}</td>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.year }}</td>
+                    <td>{{ movie.category }}</td>
+                    <td>{{ movie.active }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
